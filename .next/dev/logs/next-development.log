@@ -4,3 +4,7 @@
 (Use `node --trace-deprecation ...` to show where the warning was created)
 [00:00:19.046] Browser WARN    Image with src "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:10:54.336] Browser WARN    Image with src "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[01:11:24.378] Server  ERROR   Failed to proxy https://cinetube-backend-navy.vercel.app/api/auth/me Error: socket hang up
+[01:11:24.379] Server  ERROR   Error: socket hang up
