@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/d2be314c3ece3fbe.js"],"OutletBoundary"]
+3:"$Sreact.suspense"
+0:{"buildId":"G7x5vcJ1_HSnl97sXtjCB","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"mx-auto max-w-3xl px-4 py-12 sm:px-6","children":[["$","h1",null,{"className":"text-3xl font-bold tracking-tight","children":"About CineTube"}],["$","p",null,{"className":"mt-4 leading-relaxed text-muted-foreground","children":"CineTube is a portfolio-grade movie and series portal: browse a curated catalog, leave moderated reviews, like and comment, manage a watchlist, and unlock premium streaming or per-title purchase and rental flows powered by Stripe on the backend."}],["$","p",null,{"className":"mt-4 leading-relaxed text-muted-foreground","children":"This frontend is built with Next.js and Tailwind CSS, and talks to the CineTube Express API with Better Auth session cookies proxied in development for a smooth same-origin experience."}]]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
+4:null

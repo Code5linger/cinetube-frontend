@@ -1,27 +1,27 @@
-import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { MediaCard } from "@/components/media/MediaCard";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { getMediaList } from "@/services/media.server";
-import { Badge } from "@/components/ui/badge";
+import Link from 'next/link';
+import { ArrowRight, Sparkles } from 'lucide-react';
+import { MediaCard } from '@/components/media/MediaCard';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { getMediaList } from '@/services/media.server';
+import { Badge } from '@/components/ui/badge';
 
 export default async function HomePage({
   searchParams,
 }: {
   searchParams: Promise<{ q?: string }>;
 }) {
-  const q = (await searchParams).q ?? "";
+  const q = (await searchParams).q ?? '';
 
   const [topRated, newlyAdded, editorsPicks] = await Promise.all([
-    getMediaList({ sort: "top", limit: 8 }),
-    getMediaList({ sort: "latest", limit: 8 }),
+    getMediaList({ sort: 'top', limit: 8 }),
+    getMediaList({ sort: 'latest', limit: 8 }),
     getMediaList({ editorsPick: true, limit: 8 }),
   ]);
 
   return (
     <div>
-      <section className="relative overflow-hidden border-b border-border/80 bg-gradient-to-b from-primary/10 via-background to-background">
+      <section className="relative overflow-hidden border-b border-border/80 bg-linear-to-b from-primary/10 via-background to-background">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="secondary" className="mb-4 gap-1">
@@ -57,9 +57,7 @@ export default async function HomePage({
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-semibold tracking-tight">
-              Top rated
-            </h2>
+            <h2 className="text-2xl font-semibold tracking-tight">Top rated</h2>
             <p className="text-sm text-muted-foreground">
               Highest average scores in the catalog
             </p>
@@ -131,31 +129,31 @@ export default async function HomePage({
           </h2>
           <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-muted-foreground">
             Premium unlocks streaming for catalog titles that require a
-            subscription. Title purchase and rental are available per movie where
-            priced.
+            subscription. Title purchase and rental are available per movie
+            where priced.
           </p>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
               {
-                name: "Free",
-                price: "$0",
-                desc: "Browse, review, and use the community features.",
-                cta: "Get started",
-                href: "/register",
+                name: 'Free',
+                price: '$0',
+                desc: 'Browse, review, and use the community features.',
+                cta: 'Get started',
+                href: '/register',
               },
               {
-                name: "Monthly",
-                price: "Stripe",
-                desc: "Premium access billed monthly via checkout.",
-                cta: "Choose monthly",
-                href: "/subscription?plan=MONTHLY",
+                name: 'Monthly',
+                price: 'Stripe',
+                desc: 'Premium access billed monthly via checkout.',
+                cta: 'Choose monthly',
+                href: '/subscription?plan=MONTHLY',
               },
               {
-                name: "Yearly",
-                price: "Save 20%",
-                desc: "Best value for long-term viewers.",
-                cta: "Choose yearly",
-                href: "/subscription?plan=YEARLY",
+                name: 'Yearly',
+                price: 'Save 20%',
+                desc: 'Best value for long-term viewers.',
+                cta: 'Choose yearly',
+                href: '/subscription?plan=YEARLY',
               },
             ].map((plan) => (
               <div

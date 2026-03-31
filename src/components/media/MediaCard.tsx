@@ -1,10 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Star } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import type { MediaListItem } from "@/types/media.types";
-import { cn } from "@/lib/utils";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Star } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import type { MediaListItem } from '@/types/media.types';
+import { cn } from '@/lib/utils';
 
 export function MediaCard({
   media,
@@ -15,9 +15,9 @@ export function MediaCard({
 }) {
   const img = media.posterUrl ?? media.thumbnailUrl;
   return (
-    <Link href={`/media/${media.id}`} className={cn("group block", className)}>
+    <Link href={`/media/${media.id}`} className={cn('group block', className)}>
       <Card className="overflow-hidden border-border/80 transition-shadow hover:shadow-lg">
-        <div className="relative aspect-[2/3] bg-muted">
+        <div className="relative aspect-2/3 bg-muted">
           {img ? (
             <Image
               src={img}

@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(site)/layout,_N_T_/(site)/admin/layout,_N_T_/(site)/admin/moderation/layout,_N_T_/(site)/admin/moderation/page,_N_T_/admin/moderation"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHNpdGUp/admin/moderation/__PAGE__",
+    "/!KHNpdGUp/admin/moderation",
+    "/!KHNpdGUp/admin",
+    "/!KHNpdGUp",
+    "/_index",
+    "/_head"
+  ]
+}

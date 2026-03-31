@@ -201,12 +201,12 @@ function MediaCard({ media, className }) {
     const img = media.posterUrl ?? media.thumbnailUrl;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
         href: `/media/${media.id}`,
-        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["cn"])("group block", className),
+        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$utils$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["cn"])('group block', className),
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Card"], {
             className: "overflow-hidden border-border/80 transition-shadow hover:shadow-lg",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "relative aspect-[2/3] bg-muted",
+                    className: "relative aspect-2/3 bg-muted",
                     children: [
                         img ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                             src: img,
@@ -341,17 +341,76 @@ __turbopack_context__.s([
     "serverFetchJson",
     ()=>serverFetchJson
 ]);
+// import { cookies } from "next/headers";
+// const appOrigin = () =>
+//   process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ??
+//   "http://localhost:3000";
+// export type ApiEnvelope<T> = {
+//   success: boolean;
+//   message: string;
+//   data: T;
+//   pagination?: {
+//     page: number;
+//     limit: number;
+//     total: number;
+//     totalPages: number;
+//   };
+// };
+// export async function serverFetchJson<T>(
+//   path: string,
+//   init?: RequestInit,
+// ): Promise<ApiEnvelope<T>> {
+//   const cookieStore = await cookies();
+//   const cookieHeader = cookieStore
+//     .getAll()
+//     .map((c) => `${c.name}=${c.value}`)
+//     .join("; ");
+//   const res = await fetch(`${appOrigin()}${path}`, {
+//     ...init,
+//     cache: "no-store",
+//     headers: {
+//       "Content-Type": "application/json",
+//       ...(cookieHeader ? { Cookie: cookieHeader } : {}),
+//       ...init?.headers,
+//     },
+//   });
+//   const text = await res.text();
+//   let body: unknown;
+//   try {
+//     body = text ? JSON.parse(text) : {};
+//   } catch {
+//     throw new Error(text || `Request failed: ${res.status}`);
+//   }
+//   if (!res.ok) {
+//     const msg =
+//       typeof body === "object" &&
+//       body !== null &&
+//       "message" in body &&
+//       typeof (body as { message: unknown }).message === "string"
+//         ? (body as { message: string }).message
+//         : text || `HTTP ${res.status}`;
+//     throw new Error(msg);
+//   }
+//   return body as ApiEnvelope<T>;
+// }
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$headers$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/headers.js [app-rsc] (ecmascript)");
 ;
-const appOrigin = ()=>("TURBOPACK compile-time value", "http://localhost:3000")?.replace(/\/$/, "") ?? "http://localhost:3000";
+const getApiUrl = ()=>{
+    if ("TURBOPACK compile-time truthy", 1) {
+        return 'http://localhost:5000'; // local backend
+    }
+    //TURBOPACK unreachable
+    ;
+    const url = undefined;
+};
 async function serverFetchJson(path, init) {
     const cookieStore = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$headers$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["cookies"])();
-    const cookieHeader = cookieStore.getAll().map((c)=>`${c.name}=${c.value}`).join("; ");
-    const res = await fetch(`${appOrigin()}${path}`, {
+    const cookieHeader = cookieStore.getAll().map((c)=>`${c.name}=${c.value}`).join('; ');
+    const res = await fetch(`${getApiUrl()}${path}`, {
         ...init,
-        cache: "no-store",
+        cache: 'no-store',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             ...cookieHeader ? {
                 Cookie: cookieHeader
             } : {},
@@ -366,7 +425,7 @@ async function serverFetchJson(path, init) {
         throw new Error(text || `Request failed: ${res.status}`);
     }
     if (!res.ok) {
-        const msg = typeof body === "object" && body !== null && "message" in body && typeof body.message === "string" ? body.message : text || `HTTP ${res.status}`;
+        const msg = typeof body === 'object' && body !== null && 'message' in body && typeof body.message === 'string' ? body.message : text || `HTTP ${res.status}`;
         throw new Error(msg);
     }
     return body;
@@ -435,14 +494,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$b
 ;
 ;
 async function HomePage({ searchParams }) {
-    const q = (await searchParams).q ?? "";
+    const q = (await searchParams).q ?? '';
     const [topRated, newlyAdded, editorsPicks] = await Promise.all([
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$media$2e$server$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getMediaList"])({
-            sort: "top",
+            sort: 'top',
             limit: 8
         }),
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$media$2e$server$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getMediaList"])({
-            sort: "latest",
+            sort: 'latest',
             limit: 8
         }),
         (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$services$2f$media$2e$server$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["getMediaList"])({
@@ -453,7 +512,7 @@ async function HomePage({ searchParams }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                className: "relative overflow-hidden border-b border-border/80 bg-gradient-to-b from-primary/10 via-background to-background",
+                className: "relative overflow-hidden border-b border-border/80 bg-linear-to-b from-primary/10 via-background to-background",
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -569,7 +628,7 @@ async function HomePage({ searchParams }) {
                                         children: "Highest average scores in the catalog"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(site)/page.tsx",
-                                        lineNumber: 63,
+                                        lineNumber: 61,
                                         columnNumber: 13
                                     }, this)
                                 ]
@@ -586,12 +645,12 @@ async function HomePage({ searchParams }) {
                                     children: "View all"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(site)/page.tsx",
-                                    lineNumber: 68,
+                                    lineNumber: 66,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(site)/page.tsx",
-                                lineNumber: 67,
+                                lineNumber: 65,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -606,12 +665,12 @@ async function HomePage({ searchParams }) {
                                 media: m
                             }, m.id, false, {
                                 fileName: "[project]/src/app/(site)/page.tsx",
-                                lineNumber: 73,
+                                lineNumber: 71,
                                 columnNumber: 13
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/src/app/(site)/page.tsx",
-                        lineNumber: 71,
+                        lineNumber: 69,
                         columnNumber: 9
                     }, this)
                 ]
@@ -635,7 +694,7 @@ async function HomePage({ searchParams }) {
                                             children: "Newly added"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(site)/page.tsx",
-                                            lineNumber: 82,
+                                            lineNumber: 80,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -643,13 +702,13 @@ async function HomePage({ searchParams }) {
                                             children: "Recently added titles"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(site)/page.tsx",
-                                            lineNumber: 85,
+                                            lineNumber: 83,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/(site)/page.tsx",
-                                    lineNumber: 81,
+                                    lineNumber: 79,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
@@ -660,18 +719,18 @@ async function HomePage({ searchParams }) {
                                         children: "View all"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(site)/page.tsx",
-                                        lineNumber: 90,
+                                        lineNumber: 88,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(site)/page.tsx",
-                                    lineNumber: 89,
+                                    lineNumber: 87,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/(site)/page.tsx",
-                            lineNumber: 80,
+                            lineNumber: 78,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -680,23 +739,23 @@ async function HomePage({ searchParams }) {
                                     media: m
                                 }, m.id, false, {
                                     fileName: "[project]/src/app/(site)/page.tsx",
-                                    lineNumber: 95,
+                                    lineNumber: 93,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/(site)/page.tsx",
-                            lineNumber: 93,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(site)/page.tsx",
-                    lineNumber: 79,
+                    lineNumber: 77,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(site)/page.tsx",
-                lineNumber: 78,
+                lineNumber: 76,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -712,7 +771,7 @@ async function HomePage({ searchParams }) {
                                         children: "Editor's picks"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(site)/page.tsx",
-                                        lineNumber: 104,
+                                        lineNumber: 102,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -720,13 +779,13 @@ async function HomePage({ searchParams }) {
                                         children: "Hand-picked highlights from the team"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/(site)/page.tsx",
-                                        lineNumber: 107,
+                                        lineNumber: 105,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/(site)/page.tsx",
-                                lineNumber: 103,
+                                lineNumber: 101,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
@@ -737,18 +796,18 @@ async function HomePage({ searchParams }) {
                                     children: "View all"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/(site)/page.tsx",
-                                    lineNumber: 112,
+                                    lineNumber: 110,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(site)/page.tsx",
-                                lineNumber: 111,
+                                lineNumber: 109,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(site)/page.tsx",
-                        lineNumber: 102,
+                        lineNumber: 100,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -759,26 +818,26 @@ async function HomePage({ searchParams }) {
                                 children: "No editor picks yet — admins can flag titles in the media library."
                             }, void 0, false, {
                                 fileName: "[project]/src/app/(site)/page.tsx",
-                                lineNumber: 117,
+                                lineNumber: 115,
                                 columnNumber: 13
                             }, this),
                             editorsPicks.data.map((m)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$media$2f$MediaCard$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["MediaCard"], {
                                     media: m
                                 }, m.id, false, {
                                     fileName: "[project]/src/app/(site)/page.tsx",
-                                    lineNumber: 122,
+                                    lineNumber: 120,
                                     columnNumber: 13
                                 }, this))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/(site)/page.tsx",
-                        lineNumber: 115,
+                        lineNumber: 113,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/(site)/page.tsx",
-                lineNumber: 101,
+                lineNumber: 99,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -791,7 +850,7 @@ async function HomePage({ searchParams }) {
                             children: "Subscription plans"
                         }, void 0, false, {
                             fileName: "[project]/src/app/(site)/page.tsx",
-                            lineNumber: 129,
+                            lineNumber: 127,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -799,32 +858,32 @@ async function HomePage({ searchParams }) {
                             children: "Premium unlocks streaming for catalog titles that require a subscription. Title purchase and rental are available per movie where priced."
                         }, void 0, false, {
                             fileName: "[project]/src/app/(site)/page.tsx",
-                            lineNumber: 132,
+                            lineNumber: 130,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "mt-10 grid gap-6 md:grid-cols-3",
                             children: [
                                 {
-                                    name: "Free",
-                                    price: "$0",
-                                    desc: "Browse, review, and use the community features.",
-                                    cta: "Get started",
-                                    href: "/register"
+                                    name: 'Free',
+                                    price: '$0',
+                                    desc: 'Browse, review, and use the community features.',
+                                    cta: 'Get started',
+                                    href: '/register'
                                 },
                                 {
-                                    name: "Monthly",
-                                    price: "Stripe",
-                                    desc: "Premium access billed monthly via checkout.",
-                                    cta: "Choose monthly",
-                                    href: "/subscription?plan=MONTHLY"
+                                    name: 'Monthly',
+                                    price: 'Stripe',
+                                    desc: 'Premium access billed monthly via checkout.',
+                                    cta: 'Choose monthly',
+                                    href: '/subscription?plan=MONTHLY'
                                 },
                                 {
-                                    name: "Yearly",
-                                    price: "Save 20%",
-                                    desc: "Best value for long-term viewers.",
-                                    cta: "Choose yearly",
-                                    href: "/subscription?plan=YEARLY"
+                                    name: 'Yearly',
+                                    price: 'Save 20%',
+                                    desc: 'Best value for long-term viewers.',
+                                    cta: 'Choose yearly',
+                                    href: '/subscription?plan=YEARLY'
                                 }
                             ].map((plan)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                     className: "flex flex-col rounded-xl border border-border/80 bg-background/80 p-6 shadow-sm",
@@ -834,7 +893,7 @@ async function HomePage({ searchParams }) {
                                             children: plan.name
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(site)/page.tsx",
-                                            lineNumber: 165,
+                                            lineNumber: 163,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -842,7 +901,7 @@ async function HomePage({ searchParams }) {
                                             children: plan.price
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(site)/page.tsx",
-                                            lineNumber: 166,
+                                            lineNumber: 164,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -850,7 +909,7 @@ async function HomePage({ searchParams }) {
                                             children: plan.desc
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(site)/page.tsx",
-                                            lineNumber: 169,
+                                            lineNumber: 167,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["Button"], {
@@ -862,34 +921,34 @@ async function HomePage({ searchParams }) {
                                                 children: plan.cta
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/(site)/page.tsx",
-                                                lineNumber: 173,
+                                                lineNumber: 171,
                                                 columnNumber: 19
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/(site)/page.tsx",
-                                            lineNumber: 172,
+                                            lineNumber: 170,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, plan.name, true, {
                                     fileName: "[project]/src/app/(site)/page.tsx",
-                                    lineNumber: 161,
+                                    lineNumber: 159,
                                     columnNumber: 15
                                 }, this))
                         }, void 0, false, {
                             fileName: "[project]/src/app/(site)/page.tsx",
-                            lineNumber: 137,
+                            lineNumber: 135,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/(site)/page.tsx",
-                    lineNumber: 128,
+                    lineNumber: 126,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/(site)/page.tsx",
-                lineNumber: 127,
+                lineNumber: 125,
                 columnNumber: 7
             }, this)
         ]

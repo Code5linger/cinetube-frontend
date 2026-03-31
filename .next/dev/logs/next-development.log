@@ -1,14 +1,6 @@
-[00:00:13.213] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-[00:00:15.551] Server  LOG     ✓ Ready in 9.7s
-[00:00:36.716] Server  LOG     ○ Compiling / ...
-[00:00:41.344] Server  ERROR   (node:23616) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+[00:00:01.401] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:01.590] Server  LOG     ✓ Ready in 1163ms
+[00:00:18.364] Server  ERROR   (node:1540) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-[00:00:41.362] Server  ERROR   Failed to proxy http://localhost:5000/api/media?sort=top&limit=8 AggregateError
-[00:00:41.365] Server  ERROR   AggregateError
-[00:00:41.372] Server  ERROR   Failed to proxy http://localhost:5000/api/media?sort=latest&limit=8 AggregateError
-[00:00:41.373] Server  ERROR   AggregateError
-[00:00:41.383] Server  ERROR   Failed to proxy http://localhost:5000/api/media?limit=8&editorsPick=true AggregateError
-[00:00:41.389] Server  ERROR   AggregateError
-[00:00:41.490] Server  ERROR   ⨯ Error: Internal Server Error
-[00:00:43.289] Browser ERROR   {"digest":"3060388184","environmentName":"Server","name":"Error"}
-[00:00:43.289] Browser ERROR   {"digest":"3060388184","environmentName":"Server","name":"Error"}
+[00:00:19.046] Browser WARN    Image with src "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading

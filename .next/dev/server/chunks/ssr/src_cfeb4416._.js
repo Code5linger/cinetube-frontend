@@ -546,7 +546,7 @@ __turbopack_context__.s([
 function appOrigin() {
     if ("TURBOPACK compile-time falsy", 0) //TURBOPACK unreachable
     ;
-    return ("TURBOPACK compile-time value", "http://localhost:3000")?.replace(/\/$/, '') ?? 'http://localhost:3000';
+    return ("TURBOPACK compile-time value", "https://cinetube-frontend-5zoh.vercel.app")?.replace(/\/$/, '') ?? 'http://localhost:3000';
 }
 async function authFetch(path, body) {
     const res = await fetch(`${appOrigin()}${path}`, {

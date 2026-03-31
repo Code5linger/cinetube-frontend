@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/(site)/layout,_N_T_/(site)/watchlist/layout,_N_T_/(site)/watchlist/page,_N_T_/watchlist"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/!KHNpdGUp/watchlist/__PAGE__",
+    "/!KHNpdGUp/watchlist",
+    "/!KHNpdGUp",
+    "/_index",
+    "/_head"
+  ]
+}

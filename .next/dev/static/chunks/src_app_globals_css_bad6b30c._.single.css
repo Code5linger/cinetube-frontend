@@ -708,7 +708,7 @@
     field-sizing: content;
   }
 
-  .aspect-2\/3, .aspect-\[2\/3\] {
+  .aspect-2\/3 {
     aspect-ratio: 2 / 3;
   }
 
@@ -1561,8 +1561,17 @@
     }
   }
 
-  .bg-gradient-to-b {
-    --tw-gradient-position: to bottom in oklab;
+  .bg-linear-to-b {
+    --tw-gradient-position: to bottom;
+  }
+
+  @supports (background-image: linear-gradient(in lab, red, red)) {
+    .bg-linear-to-b {
+      --tw-gradient-position: to bottom in oklab;
+    }
+  }
+
+  .bg-linear-to-b {
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
 
