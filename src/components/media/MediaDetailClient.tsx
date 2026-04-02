@@ -68,11 +68,11 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
     [watchlistData, media.id],
   );
 
-  const userReview = media.reviews.find(
+  const userReview = (media.reviews ?? []).find(
     (r) => r != null && r.user?.id === user?.id,
   );
 
-  const visibleReviews = media.reviews.filter(
+  const visibleReviews = (media.reviews ?? []).filter(
     (r) => r != null && (r.isPublished || r.user?.id === user?.id),
   );
 

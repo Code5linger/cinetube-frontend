@@ -77,7 +77,7 @@ export default async function MediaDetailPage({
             </span>
             <span className="text-muted-foreground"> / 10 avg · </span>
             <span className="text-muted-foreground">
-              {media.reviews.filter((r) => r.isPublished).length} published
+              {media.reviews.filter((r) => r?.isPublished).length} published
               reviews
             </span>
           </p>
