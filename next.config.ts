@@ -1,11 +1,6 @@
 import type { NextConfig } from 'next';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-if (!apiUrl) {
-  throw new Error(
-    'NEXT_PUBLIC_API_URL is not defined! Please add it to .env.local for dev or Vercel env for production.',
-  );
-}
+const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000';
 
 const nextConfig: NextConfig = {
   async rewrites() {
