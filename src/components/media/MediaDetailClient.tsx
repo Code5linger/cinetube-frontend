@@ -1,48 +1,48 @@
-"use client";
+'use client';
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Heart, ListPlus, ListMinus, Loader2 } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Textarea } from "@/components/ui/textarea";
-import { useSession } from "@/hooks/useSession";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Heart, ListPlus, ListMinus, Loader2 } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Textarea } from '@/components/ui/textarea';
+import { useSession } from '@/hooks/useSession';
 import {
   addToWatchlist,
   fetchWatchlist,
   removeFromWatchlist,
-} from "@/services/watchlist.service";
+} from '@/services/watchlist.service';
 import {
   createReview,
   deleteReview,
   postComment,
   toggleLikeReview,
   updateReview,
-} from "@/services/review.service";
+} from '@/services/review.service';
 import {
   approveReview as adminApproveReview,
   deleteReviewAdmin,
   unpublishReview as adminUnpublishReview,
-} from "@/services/admin.service";
-import type { MediaDetail } from "@/types/media.types";
-import { RatingStars } from "@/components/media/RatingStars";
-import { useMemo, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from '@/services/admin.service';
+import type { MediaDetail } from '@/types/media.types';
+import { RatingStars } from '@/components/media/RatingStars';
+import { useMemo, useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 function toYouTubeEmbed(url: string): string | null {
   try {
     const u = new URL(url);
-    if (u.hostname.includes("youtube.com")) {
-      const id = u.searchParams.get("v");
+    if (u.hostname.includes('youtube.com')) {
+      const id = u.searchParams.get('v');
       if (id) return `https://www.youtube.com/embed/${id}`;
-      const p = u.pathname.split("/").filter(Boolean);
-      if (p[0] === "embed" && p[1]) return url;
+      const p = u.pathname.split('/').filter(Boolean);
+      if (p[0] === 'embed' && p[1]) return url;
     }
-    if (u.hostname === "youtu.be") {
+    if (u.hostname === 'youtu.be') {
       const id = u.pathname.slice(1);
       if (id) return `https://www.youtube.com/embed/${id}`;
     }
@@ -58,7 +58,7 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
   const router = useRouter();
 
   const { data: watchlistData } = useQuery({
-    queryKey: ["watchlist"],
+    queryKey: ['watchlist'],
     queryFn: async () => (await fetchWatchlist()).data,
     enabled: Boolean(user),
   });
@@ -68,18 +68,20 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
     [watchlistData, media.id],
   );
 
-  const userReview = media.reviews.find((r) => r.user.id === user?.id);
+  const userReview = media.reviews.find(
+    (r) => r != null && r.user?.id === user?.id,
+  );
 
   const visibleReviews = media.reviews.filter(
-    (r) => r.isPublished || r.user.id !== user?.id,
+    (r) => r != null && (r.isPublished || r.user?.id === user?.id),
   );
 
   const likeMutation = useMutation({
     mutationFn: (reviewId: string) => toggleLikeReview(reviewId),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["session", "me"] });
+      qc.invalidateQueries({ queryKey: ['session', 'me'] });
       router.refresh();
-      toast.success("Updated");
+      toast.success('Updated');
     },
     onError: (e: Error) => toast.error(e.message),
   });
@@ -88,16 +90,16 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
     mutationFn: async () => {
       if (onWatchlist) await removeFromWatchlist(media.id);
       else await addToWatchlist(media.id);
-      await qc.invalidateQueries({ queryKey: ["watchlist"] });
+      await qc.invalidateQueries({ queryKey: ['watchlist'] });
     },
-    onSuccess: () => toast.success("Watchlist updated"),
+    onSuccess: () => toast.success('Watchlist updated'),
     onError: (e: Error) => toast.error(e.message),
   });
 
-  const [reviewRating, setReviewRating] = useState("8");
-  const [reviewBody, setReviewBody] = useState("");
+  const [reviewRating, setReviewRating] = useState('8');
+  const [reviewBody, setReviewBody] = useState('');
   const [spoiler, setSpoiler] = useState(false);
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState('');
 
   const submitReview = useMutation({
     mutationFn: () =>
@@ -107,13 +109,13 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
         content: reviewBody,
         spoiler,
         tags: tags
-          .split(",")
+          .split(',')
           .map((t) => t.trim())
           .filter(Boolean),
       }),
     onSuccess: () => {
-      toast.success("Review submitted — pending moderation");
-      setReviewBody("");
+      toast.success('Review submitted — pending moderation');
+      setReviewBody('');
       router.refresh();
     },
     onError: (e: Error) => toast.error(e.message),
@@ -242,8 +244,8 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
             </li>
           )}
           {visibleReviews.map((r) => {
-            const liked =
-              user && r.likes.some((l) => l.userId === user.id);
+            if (!r || !r.likes || !r.comments) return null;
+            const liked = user && r.likes.some((l) => l.userId === user.id);
             return (
               <li
                 key={r.id}
@@ -251,7 +253,7 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
               >
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <div>
-                    <p className="font-medium">{r.user.name ?? "Member"}</p>
+                    <p className="font-medium">{r.user.name ?? 'Member'}</p>
                     <p className="text-xs text-muted-foreground">
                       {new Date(r.createdAt).toLocaleString()}
                     </p>
@@ -276,13 +278,13 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
                 <div className="mt-4 flex flex-wrap items-center gap-3">
                   {user ? (
                     <Button
-                      variant={liked ? "default" : "outline"}
+                      variant={liked ? 'default' : 'outline'}
                       size="sm"
                       disabled={likeMutation.isPending}
                       onClick={() => likeMutation.mutate(r.id)}
                     >
                       <Heart
-                        className={`size-4 ${liked ? "fill-current" : ""}`}
+                        className={`size-4 ${liked ? 'fill-current' : ''}`}
                       />
                       {r.likes.length} likes
                     </Button>
@@ -290,7 +292,7 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
                     <p className="text-xs text-muted-foreground">
                       <Link href="/login" className="underline">
                         Log in
-                      </Link>{" "}
+                      </Link>{' '}
                       to like
                     </p>
                   )}
@@ -301,10 +303,10 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
                     {r.comments.map((c) => (
                       <li key={c.id} className="text-sm">
                         <span className="font-medium">
-                          {c.user.name ?? "Member"}
+                          {c.user.name ?? 'Member'}
                         </span>
                         <span className="text-muted-foreground">
-                          {" "}
+                          {' '}
                           · {new Date(c.createdAt).toLocaleDateString()}
                         </span>
                         <p className="mt-1 text-foreground/90">{c.content}</p>
@@ -320,7 +322,7 @@ export function MediaDetailClient({ media }: { media: MediaDetail }) {
                   />
                 )}
 
-                {user?.role === "ADMIN" && (
+                {user?.role === 'ADMIN' && (
                   <AdminReviewBar
                     reviewId={r.id}
                     onDone={() => router.refresh()}
@@ -342,12 +344,12 @@ function CommentBox({
   reviewId: string;
   onPosted: () => void;
 }) {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
   const m = useMutation({
     mutationFn: () => postComment(reviewId, { content }),
     onSuccess: () => {
-      toast.success("Comment submitted — pending moderation");
-      setContent("");
+      toast.success('Comment submitted — pending moderation');
+      setContent('');
       onPosted();
     },
     onError: (e: Error) => toast.error(e.message),
@@ -383,15 +385,13 @@ function AdminReviewBar({
   onDone: () => void;
 }) {
   const m = useMutation({
-    mutationFn: async (action: "approve" | "unpublish" | "delete") => {
-      if (action === "approve") await adminApproveReview(reviewId);
-      else if (action === "unpublish") await adminUnpublishReview(reviewId);
+    mutationFn: async (action: 'approve' | 'unpublish' | 'delete') => {
+      if (action === 'approve') await adminApproveReview(reviewId);
+      else if (action === 'unpublish') await adminUnpublishReview(reviewId);
       else await deleteReviewAdmin(reviewId);
     },
     onSuccess: (_, action) => {
-      toast.success(
-        action === "delete" ? "Review deleted" : "Review updated",
-      );
+      toast.success(action === 'delete' ? 'Review deleted' : 'Review updated');
       onDone();
     },
     onError: (e: Error) => toast.error(e.message),
@@ -404,7 +404,7 @@ function AdminReviewBar({
         size="sm"
         variant="secondary"
         disabled={m.isPending}
-        onClick={() => m.mutate("approve")}
+        onClick={() => m.mutate('approve')}
       >
         Approve
       </Button>
@@ -412,7 +412,7 @@ function AdminReviewBar({
         size="sm"
         variant="outline"
         disabled={m.isPending}
-        onClick={() => m.mutate("unpublish")}
+        onClick={() => m.mutate('unpublish')}
       >
         Unpublish
       </Button>
@@ -420,7 +420,7 @@ function AdminReviewBar({
         size="sm"
         variant="destructive"
         disabled={m.isPending}
-        onClick={() => m.mutate("delete")}
+        onClick={() => m.mutate('delete')}
       >
         Delete
       </Button>
@@ -432,13 +432,13 @@ function UnpublishedReviewEditor({
   review,
   onSaved,
 }: {
-  review: MediaDetail["reviews"][number];
+  review: MediaDetail['reviews'][number];
   onSaved: () => void;
 }) {
   const [rating, setRating] = useState(String(review.rating));
   const [content, setContent] = useState(review.content);
   const [spoiler, setSpoiler] = useState(review.spoiler);
-  const [tags, setTags] = useState(review.tags.join(", "));
+  const [tags, setTags] = useState(review.tags.join(', '));
 
   const save = useMutation({
     mutationFn: () =>
@@ -447,12 +447,12 @@ function UnpublishedReviewEditor({
         content,
         spoiler,
         tags: tags
-          .split(",")
+          .split(',')
           .map((t) => t.trim())
           .filter(Boolean),
       }),
     onSuccess: () => {
-      toast.success("Review updated");
+      toast.success('Review updated');
       onSaved();
     },
     onError: (e: Error) => toast.error(e.message),
@@ -461,7 +461,7 @@ function UnpublishedReviewEditor({
   const del = useMutation({
     mutationFn: () => deleteReview(review.id),
     onSuccess: () => {
-      toast.success("Review deleted");
+      toast.success('Review deleted');
       onSaved();
     },
     onError: (e: Error) => toast.error(e.message),

@@ -19,7 +19,10 @@ export default async function MediaDetailPage({
   try {
     const res = await getMediaById(id);
     media = res.data;
-  } catch {
+    console.log('reviews count:', media.reviews?.length);
+    console.log('first review:', JSON.stringify(media.reviews?.[0]));
+  } catch (e) {
+    console.error('getMediaById failed:', e);
     notFound();
   }
 
