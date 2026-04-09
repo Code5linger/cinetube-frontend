@@ -341,63 +341,12 @@ __turbopack_context__.s([
     "serverFetchJson",
     ()=>serverFetchJson
 ]);
-// import { cookies } from "next/headers";
-// const appOrigin = () =>
-//   process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ??
-//   "http://localhost:3000";
-// export type ApiEnvelope<T> = {
-//   success: boolean;
-//   message: string;
-//   data: T;
-//   pagination?: {
-//     page: number;
-//     limit: number;
-//     total: number;
-//     totalPages: number;
-//   };
-// };
-// export async function serverFetchJson<T>(
-//   path: string,
-//   init?: RequestInit,
-// ): Promise<ApiEnvelope<T>> {
-//   const cookieStore = await cookies();
-//   const cookieHeader = cookieStore
-//     .getAll()
-//     .map((c) => `${c.name}=${c.value}`)
-//     .join("; ");
-//   const res = await fetch(`${appOrigin()}${path}`, {
-//     ...init,
-//     cache: "no-store",
-//     headers: {
-//       "Content-Type": "application/json",
-//       ...(cookieHeader ? { Cookie: cookieHeader } : {}),
-//       ...init?.headers,
-//     },
-//   });
-//   const text = await res.text();
-//   let body: unknown;
-//   try {
-//     body = text ? JSON.parse(text) : {};
-//   } catch {
-//     throw new Error(text || `Request failed: ${res.status}`);
-//   }
-//   if (!res.ok) {
-//     const msg =
-//       typeof body === "object" &&
-//       body !== null &&
-//       "message" in body &&
-//       typeof (body as { message: unknown }).message === "string"
-//         ? (body as { message: string }).message
-//         : text || `HTTP ${res.status}`;
-//     throw new Error(msg);
-//   }
-//   return body as ApiEnvelope<T>;
-// }
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$headers$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/headers.js [app-rsc] (ecmascript)");
 ;
 const getApiUrl = ()=>{
     if ("TURBOPACK compile-time truthy", 1) {
-        return 'http://localhost:5000'; // local backend
+        // return 'http://localhost:5000'; // local backend
+        return 'https://cinetube-backend-navy.vercel.app'; // live backend
     }
     //TURBOPACK unreachable
     ;

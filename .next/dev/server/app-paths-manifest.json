@@ -1,3 +1,5 @@
 {
+  "/(site)/browse/page": "app/(site)/browse/page.js",
+  "/(site)/login/page": "app/(site)/login/page.js",
   "/(site)/page": "app/(site)/page.js"
 }

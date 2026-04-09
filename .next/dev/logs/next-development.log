@@ -1,8 +1,27 @@
-[00:00:13.692] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-[00:00:15.932] Server  LOG     ✓ Ready in 10.6s
-[00:00:18.947] Server  LOG     ○ Compiling / ...
-[00:00:21.072] Server  ERROR   ⨯ TypeError: fetch failed
-[00:00:22.215] Browser ERROR   {"digest":"179368177","environmentName":"Server","name":"TypeError"}
-[00:00:22.215] Browser ERROR   {"digest":"179368177","environmentName":"Server","name":"TypeError"}
-[00:00:23.617] Browser ERROR   {"digest":"179368177","environmentName":"Server","name":"TypeError"}
-[00:00:23.617] Browser ERROR   {"digest":"179368177","environmentName":"Server","name":"TypeError"}
+[00:00:01.421] Server  WARN    ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:01.600] Server  LOG     ✓ Ready in 1138ms
+[00:00:04.199] Server  ERROR   ⨯ Error: Invalid src prop (https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4mhIjQZEf4Onm00UGLv5L7J5Q9KzMNmejzILJ64ps_g&s) on `next/image`, hostname "encrypted-tbn0.gstatic.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+[00:00:04.529] Browser ERROR   {}
+[00:00:04.529] Browser ERROR   {}
+[00:00:10.405] Browser ERROR   uncaughtError: Error: Switched to client rendering because the server rendering errored:
+
+Invalid src prop (https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4mhIjQZEf4Onm00UGLv5L7J5Q9KzMNmejzILJ64ps_g&s) on `next/image`, hostname "encrypted-tbn0.gstatic.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+[00:00:18.448] Server  ERROR   (node:31620) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[00:05:27.582] Server  LOG     ✓ Compiled in 252ms
+[00:05:52.697] Browser WARN    Image with src "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4mhIjQZEf4Onm00UGLv5L7J5Q9KzMNmejzILJ64ps_g&s" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:05:52.697] Browser WARN    Image with src "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:06:24.219] Browser WARN    Image with src "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:08:09.963] Server  ERROR   ⨯ ReferenceError: Image is not defined
+[00:08:10.120] Browser ERROR   {"digest":"2716222172","environmentName":"Server","name":"ReferenceError"}
+[00:08:10.120] Browser ERROR   {"digest":"2716222172","environmentName":"Server","name":"ReferenceError"}
+[00:08:14.266] Server  ERROR   ⨯ ReferenceError: Image is not defined
+[00:09:24.858] Browser WARN    Image with src "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[00:09:34.371] Browser WARN    Image with src "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
